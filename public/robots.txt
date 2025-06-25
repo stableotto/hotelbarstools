@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://hotelbarstools.com/sitemap.xml
+
+# Block admin areas
+Disallow: /admin/
+Disallow: /_astro/
+
+# Allow all images
+Allow: /images/ 

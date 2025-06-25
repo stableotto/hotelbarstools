@@ -1,16 +1,54 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Clientele from '../components/Clientele.astro';
+import Collections from '../components/Collections.astro';
+import Showcase from '../components/Showcase.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout 
+  title="Hotel Bar Stools - Premium Commercial Furniture" 
+  description="Discover our premium collection of hotel bar stools designed for commercial use. Modern, durable, and stylish seating solutions for hospitality businesses."
+>
+  <Header currentPage="/" />
+  
+  <Hero 
+    title="Premium Hotel Bar Stools"
+    subtitle="Elegant, durable, and stylish seating solutions for hospitality businesses"
+    backgroundImage="/images/hero-background.jpg"
+    backgroundAlt="Modern hotel bar with premium bar stools"
+    ctaText="Explore Collections"
+    ctaUrl="#collections"
+  />
+  
+  <main id="main-content">
+    <!-- Clientele section -->
+    <Clientele />
+    
+    <!-- Collections section -->
+    <Collections />
+    
+    <!-- Showcase section -->
+    <Showcase />
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Account for fixed header */
+  body {
+    padding-top: 80px;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      padding-top: 100px;
+    }
+  }
+
+  /* Additional page-specific styles can go here */
+</style>

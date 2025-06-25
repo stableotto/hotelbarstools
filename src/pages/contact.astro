@@ -1,0 +1,525 @@
+---
+// Contact page - Professional contact form and information
+// Following rules: accessibility, security, error handling
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// SEO and page data
+const pageTitle = "Contact Us - Get Your Custom Quote | Hotel Bar Stools";
+const pageDescription = "Contact our design experts for custom quotes, project consultations, and product information. We're here to help transform your hospitality space.";
+
+// Contact information (centralized data following DRY principles)
+const contactInfo = {
+  email: 'info@hotelbarstools.com',
+  phone: '+1 (555) 123-4567',
+  address: {
+    street: '123 Design District',
+    city: 'New York',
+    state: 'NY',
+    zip: '10001',
+    country: 'USA'
+  },
+  hours: {
+    weekdays: 'Monday - Friday: 9:00 AM - 6:00 PM EST',
+    weekends: 'Saturday: 10:00 AM - 4:00 PM EST',
+    closed: 'Sunday: Closed'
+  }
+};
+
+// Office locations (following proper data structure)
+const offices = [
+  {
+    name: 'New York Showroom',
+    address: '123 Design District, New York, NY 10001',
+    phone: '+1 (555) 123-4567',
+    email: 'ny@hotelbarstools.com',
+    hours: 'Mon-Fri: 9-6, Sat: 10-4'
+  },
+  {
+    name: 'Los Angeles Studio',
+    address: '456 Design Avenue, Los Angeles, CA 90210',
+    phone: '+1 (555) 987-6543',
+    email: 'la@hotelbarstools.com',
+    hours: 'Mon-Fri: 8-5, Sat: 9-3'
+  }
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header currentPage="/contact" />
+  
+  <main id="main-content">
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Get in Touch</h1>
+          <p class="hero-description">
+            Ready to transform your space? Our design experts are here to help you create the perfect seating solution for your hospitality business.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form & Info -->
+    <section class="contact-main">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact Form -->
+          <div class="contact-form-section">
+            <h2 class="section-title">Send Us a Message</h2>
+            <p class="section-description">
+              Fill out the form below and we'll get back to you within 24 hours.
+            </p>
+
+            <form class="contact-form" data-contact-form>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName" class="form-label">First Name *</label>
+                  <input 
+                    type="text" 
+                    id="firstName"
+                    name="firstName"
+                    class="form-input"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName" class="form-label">Last Name *</label>
+                  <input 
+                    type="text" 
+                    id="lastName"
+                    name="lastName"
+                    class="form-input"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input 
+                  type="email" 
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="company" class="form-label">Company/Hotel Name</label>
+                <input 
+                  type="text" 
+                  id="company"
+                  name="company"
+                  class="form-input"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message *</label>
+                <textarea 
+                  id="message"
+                  name="message"
+                  class="form-textarea"
+                  rows="5"
+                  required
+                  placeholder="Tell us about your project, timeline, and any specific requirements..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="form-submit">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="contact-info-section">
+            <h2 class="section-title">Contact Information</h2>
+            
+            <div class="contact-info-grid">
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Email</h3>
+                  <a href="mailto:info@hotelbarstools.com" class="info-link">
+                    info@hotelbarstools.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Phone</h3>
+                  <a href="tel:+15551234567" class="info-link">
+                    +1 (555) 123-4567
+                  </a>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Address</h3>
+                  <address class="info-address">
+                    123 Design District<br/>
+                    New York, NY 10001
+                  </address>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="info-content">
+                  <h3 class="info-title">Business Hours</h3>
+                  <div class="hours-list">
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM EST</p>
+                    <p>Saturday: 10:00 AM - 4:00 PM EST</p>
+                    <p>Sunday: Closed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Office Locations -->
+    <section class="office-locations">
+      <div class="container">
+        <h2 class="section-title">Our Locations</h2>
+        <div class="offices-grid">
+          {offices.map((office) => (
+            <div class="office-card">
+              <h3 class="office-name">{office.name}</h3>
+              <address class="office-address">{office.address}</address>
+              <div class="office-contact">
+                <a href={`tel:${office.phone.replace(/\D/g, '')}`} class="office-phone">
+                  {office.phone}
+                </a>
+                <a href={`mailto:${office.email}`} class="office-email">
+                  {office.email}
+                </a>
+              </div>
+              <p class="office-hours">{office.hours}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Contact Hero */
+  .contact-hero {
+    padding: calc(var(--space-xl) * 2) 0 var(--space-xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: var(--color-white);
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    line-height: 1.1;
+  }
+
+  .hero-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  /* Main Contact Section */
+  .contact-main {
+    padding: var(--space-xl) 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .section-description {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+  }
+
+  /* Contact Form */
+  .contact-form {
+    background-color: var(--color-white);
+    padding: var(--space-lg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-md);
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-sm);
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-fast);
+    background-color: var(--color-white);
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+
+  /* Submit Button */
+  .form-submit {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+  }
+
+  .form-submit:hover,
+  .form-submit:focus {
+    background-color: #c19660;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Contact Info */
+  .contact-info-section {
+    background-color: var(--color-secondary);
+    padding: var(--space-lg);
+    border-radius: 16px;
+  }
+
+  .contact-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .info-icon {
+    color: var(--color-accent);
+    background-color: var(--color-white);
+    padding: var(--space-sm);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .info-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .info-link {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .info-link:hover,
+  .info-link:focus {
+    color: var(--color-accent);
+  }
+
+  .info-address {
+    color: var(--color-text);
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  .hours-list p {
+    margin: 0;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    line-height: 1.4;
+  }
+
+  /* Office Locations */
+  .office-locations {
+    padding: var(--space-xl) 0;
+    background-color: var(--color-white);
+  }
+
+  .offices-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .office-card {
+    background-color: var(--color-secondary);
+    padding: var(--space-lg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal);
+  }
+
+  .office-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .office-name {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .office-address {
+    font-style: normal;
+    color: var(--color-text);
+    margin-bottom: var(--space-sm);
+    line-height: 1.5;
+  }
+
+  .office-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .office-phone,
+  .office-email {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+  }
+
+  .office-phone:hover,
+  .office-email:hover {
+    color: var(--color-accent);
+  }
+
+  .office-hours {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    margin: 0;
+  }
+
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .form-submit {
+      transition: none;
+    }
+
+    .form-submit:hover {
+      transform: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .form-input,
+    .form-textarea {
+      border-width: 3px;
+    }
+
+    .contact-form,
+    .contact-info-section {
+      border: 2px solid var(--color-primary);
+    }
+  }
+</style> 

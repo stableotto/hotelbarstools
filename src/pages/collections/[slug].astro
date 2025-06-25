@@ -1,0 +1,561 @@
+---
+// Dynamic collection page - Individual collection detail pages
+// Following rules: error handling, security, performance optimization
+
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Type definitions for content collections
+type CollectionData = CollectionEntry<'collections'>;
+
+// Get collection data with error handling
+const { slug } = Astro.params;
+const { collection } = Astro.props;
+
+// Security: Validate slug parameter (following security rules)
+if (!slug || typeof slug !== 'string') {
+  throw new Error('Invalid collection slug parameter');
+}
+
+// Type safety and error handling
+if (!collection) {
+  throw new Error(`Collection not found for slug: ${slug}`);
+}
+
+// Extract data from content collection
+const { data: collectionData, body: collectionContent } = collection;
+
+// Static path generation using content collections
+export async function getStaticPaths() {
+  try {
+    // Get all collections from content collections
+    const collections = await getCollection('collections');
+    
+    return collections.map((collection) => ({
+      params: { slug: collection.slug },
+      props: { collection }
+    }));
+  } catch (error) {
+    console.error('Error generating static paths:', error);
+    return [];
+  }
+}
+
+// SEO optimization using content collection data
+const pageTitle = collectionData.seo.title;
+const pageDescription = collectionData.seo.description;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header currentPage={`/collections/${slug}`} />
+  
+  <main id="main-content">
+    <!-- Collection Hero Section -->
+    <section class="collection-hero">
+      <div class="hero-image-container">
+        <img 
+          src={collectionData.hero_image}
+          alt={collectionData.hero_alt}
+          class="hero-image"
+          width="1200"
+          height="600"
+          loading="eager"
+        />
+        <div class="hero-overlay">
+          <div class="container">
+            <div class="hero-content">
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <ol class="breadcrumb-list">
+                  <li class="breadcrumb-item">
+                    <a href="/" class="breadcrumb-link">Home</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <a href="/#collections" class="breadcrumb-link">Collections</a>
+                  </li>
+                  <li class="breadcrumb-item current" aria-current="page">
+                    {collectionData.title}
+                  </li>
+                </ol>
+              </nav>
+              
+              <h1 class="collection-title">{collectionData.title}</h1>
+              <p class="collection-description">{collectionData.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collection Features -->
+    <section class="collection-features">
+      <div class="container">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+          {collectionData.features.map((feature, index) => (
+            <div class="feature-item">
+              <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="feature-text">{feature}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Collection Products -->
+    <section class="collection-products">
+      <div class="container">
+        <h2 class="section-title">Products in This Collection</h2>
+        <div class="products-grid">
+          {collectionData.products.map((product) => (
+            <article class="product-card">
+              <div class="product-image-container">
+                <img 
+                  src={product.image}
+                  alt={product.alt}
+                  class="product-image"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                />
+                <div class="product-overlay">
+                  <button 
+                    class="view-details-btn"
+                    data-product-id={product.id}
+                    aria-label={`View details for ${product.name}`}
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+              
+              <div class="product-info">
+                <h3 class="product-name">{product.name}</h3>
+                <p class="product-material">{product.material}</p>
+                <p class="product-price">{product.price_range}</p>
+                
+                <div class="product-colors">
+                  <span class="colors-label">Available Colors:</span>
+                  <div class="color-swatches">
+                    {product.colors.map((color) => (
+                      <span 
+                        class="color-swatch"
+                        data-color={color.toLowerCase()}
+                        title={color}
+                        aria-label={`Available in ${color}`}
+                      ></span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="collection-cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Transform Your Space?</h2>
+          <p class="cta-description">
+            Contact our design experts to discuss your project and get a custom quote for the {collectionData.title}.
+          </p>
+          <div class="cta-buttons">
+            <a href="/contact" class="btn btn-primary">Get Quote</a>
+            <a href="/#collections" class="btn btn-secondary">View All Collections</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Collection Hero */
+  .collection-hero {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(212, 165, 116, 0.4) 100%
+    );
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    color: var(--color-white);
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    margin-bottom: var(--space-md);
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-xs);
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb-item:not(:last-child)::after {
+    content: '›';
+    margin-left: var(--space-xs);
+    opacity: 0.6;
+  }
+
+  .breadcrumb-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-accent);
+  }
+
+  .breadcrumb-item.current {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  .collection-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    line-height: 1.1;
+  }
+
+  .collection-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  /* Section Styles */
+  .collection-features,
+  .collection-products {
+    padding: var(--space-xl) 0;
+  }
+
+  .collection-features {
+    background-color: var(--color-secondary);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    color: var(--color-primary);
+  }
+
+  /* Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal);
+  }
+
+  .feature-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .feature-icon {
+    color: var(--color-accent);
+    background-color: rgba(212, 165, 116, 0.1);
+    padding: var(--space-sm);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .feature-text {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Products Grid */
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .product-card {
+    background-color: var(--color-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-normal);
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .product-image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+
+  .product-card:hover .product-image {
+    transform: scale(1.05);
+  }
+
+  .product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+
+  .view-details-btn {
+    padding: var(--space-sm) var(--space-lg);
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  .view-details-btn:hover {
+    background-color: #c19660;
+  }
+
+  .product-info {
+    padding: var(--space-lg);
+  }
+
+  .product-name {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    color: var(--color-primary);
+  }
+
+  .product-material {
+    color: var(--color-text-light);
+    margin-bottom: var(--space-sm);
+  }
+
+  .product-price {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .product-colors {
+    margin-top: var(--space-md);
+  }
+
+  .colors-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-bottom: var(--space-xs);
+    display: block;
+  }
+
+  .color-swatches {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .color-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--color-white);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .color-swatch[data-color="brown"] { background-color: #8B4513; }
+  .color-swatch[data-color="black"] { background-color: #000000; }
+  .color-swatch[data-color="white"] { background-color: #FFFFFF; }
+  .color-swatch[data-color="cognac"] { background-color: #A0522D; }
+  .color-swatch[data-color="navy"] { background-color: #000080; }
+  .color-swatch[data-color="grey"] { background-color: #808080; }
+
+  /* Call to Action */
+  .collection-cta {
+    padding: var(--space-xl) 0;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    min-width: 160px;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border: 2px solid var(--color-accent);
+  }
+
+  .btn-primary:hover {
+    background-color: #c19660;
+    border-color: #c19660;
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-white);
+    border: 2px solid var(--color-white);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cta-buttons {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .feature-item,
+    .product-card,
+    .product-image,
+    .product-overlay,
+    .btn {
+      transition: none;
+    }
+
+    .feature-item:hover,
+    .product-card:hover {
+      transform: none;
+    }
+
+    .product-card:hover .product-image {
+      transform: none;
+    }
+  }
+</style> 

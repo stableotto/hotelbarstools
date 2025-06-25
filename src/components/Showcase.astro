@@ -1,0 +1,507 @@
+---
+// Showcase component - Product gallery with masonry layout
+// Following DRY principles and clear code organization
+
+interface ShowcaseImage {
+  id: number;
+  src: string;
+  alt: string;
+  category: string;
+  title: string;
+  width: number;
+  height: number;
+}
+
+// Static data for showcase images
+const showcaseImages: ShowcaseImage[] = [
+  {
+    id: 1,
+    src: "/images/showcase/product-1.jpg",
+    alt: "Executive bar stool in modern hotel lobby",
+    category: "Executive",
+    title: "Premium Leather Executive Stool",
+    width: 400,
+    height: 500
+  },
+  {
+    id: 2,
+    src: "/images/showcase/product-2.jpg", 
+    alt: "Minimalist bar stools in contemporary setting",
+    category: "Minimalist",
+    title: "Modern Steel & Wood Design",
+    width: 400,
+    height: 300
+  },
+  {
+    id: 3,
+    src: "/images/showcase/product-3.jpg",
+    alt: "Classic luxury bar stools with velvet upholstery",
+    category: "Classic",
+    title: "Velvet Upholstered Classic",
+    width: 400,
+    height: 450
+  },
+  {
+    id: 4,
+    src: "/images/showcase/product-4.jpg",
+    alt: "Industrial chic bar stools with metal frame",
+    category: "Industrial", 
+    title: "Industrial Metal Frame",
+    width: 400,
+    height: 350
+  },
+  {
+    id: 5,
+    src: "/images/showcase/product-5.jpg",
+    alt: "Boutique style bar stool in intimate setting",
+    category: "Boutique",
+    title: "Boutique Curved Design",
+    width: 400,
+    height: 550
+  },
+  {
+    id: 6,
+    src: "/images/showcase/product-6.jpg",
+    alt: "Outdoor weather-resistant bar stools",
+    category: "Outdoor",
+    title: "Weather-Resistant Outdoor",
+    width: 400,
+    height: 400
+  }
+];
+
+// Extract categories for filter (DRY principle)
+const categories = ['All', ...new Set(showcaseImages.map(img => img.category))];
+---
+
+<section class="showcase" id="showcase">
+  <div class="container">
+    <div class="showcase-header">
+      <h2 class="section-title">Product Showcase</h2>
+      <p class="section-subtitle">
+        Explore our premium bar stools in beautiful hotel and restaurant settings
+      </p>
+    </div>
+
+    <!-- Category Filter Navigation -->
+    <nav class="filter-nav" aria-label="Product category filter">
+      <ul class="filter-list" role="list">
+        {categories.map((category, index) => (
+          <li class="filter-item">
+            <button 
+              class={`filter-button ${index === 0 ? 'active' : ''}`}
+              data-filter={category.toLowerCase()}
+              type="button"
+              aria-pressed={index === 0 ? 'true' : 'false'}
+            >
+              {category}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid" data-gallery>
+      {showcaseImages.map((image) => (
+        <article 
+          class="gallery-item" 
+          data-category={image.category.toLowerCase()}
+        >
+          <button 
+            class="gallery-button"
+            data-lightbox-trigger
+            data-image-id={image.id}
+            aria-label={`View ${image.title} in lightbox`}
+            type="button"
+          >
+            <div class="image-wrapper">
+              <img
+                data-src={image.src}
+                alt={image.alt}
+                class="gallery-image"
+                width={image.width}
+                height={image.height}
+                loading="lazy"
+              />
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  <h3 class="image-title">{image.title}</h3>
+                  <span class="image-category">{image.category}</span>
+                  <div class="zoom-icon" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                      <path d="m21 21-4.35-4.35M11 8v6M8 11h6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </button>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" data-lightbox-modal aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+    <div class="lightbox-content">
+      <button 
+        class="lightbox-close" 
+        data-lightbox-close
+        type="button"
+        aria-label="Close lightbox"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      
+      <div class="lightbox-image-container">
+        <img 
+          class="lightbox-image" 
+          data-lightbox-image
+          alt=""
+          src=""
+        />
+      </div>
+      
+      <div class="lightbox-info">
+        <h3 class="lightbox-title" data-lightbox-title></h3>
+        <p class="lightbox-category" data-lightbox-category></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .showcase {
+    padding: var(--space-xl) 0;
+    background-color: var(--color-secondary);
+    position: relative;
+  }
+
+  .showcase-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Filter Navigation */
+  .filter-nav {
+    margin-bottom: var(--space-xl);
+  }
+
+  .filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .filter-button {
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-white);
+    color: var(--color-text);
+    border: 2px solid var(--color-white);
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: capitalize;
+  }
+
+  .filter-button:hover,
+  .filter-button:focus {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-color: var(--color-accent);
+  }
+
+  .filter-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+
+  /* Gallery Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: var(--space-md);
+  }
+
+  .gallery-item.hidden {
+    display: none;
+  }
+
+  .gallery-button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform var(--transition-normal);
+  }
+
+  .gallery-button:hover {
+    transform: translateY(-4px);
+  }
+
+  .gallery-button:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-md);
+    transition: box-shadow var(--transition-normal);
+  }
+
+  .gallery-button:hover .image-wrapper {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .gallery-button:hover .gallery-image {
+    transform: scale(1.05);
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(212, 165, 116, 0.4) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .gallery-button:hover .image-overlay,
+  .gallery-button:focus .image-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    text-align: center;
+    color: var(--color-white);
+    padding: var(--space-md);
+  }
+
+  .image-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .image-category {
+    font-size: var(--font-size-sm);
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-sm);
+    display: block;
+  }
+
+  .zoom-icon {
+    margin-top: var(--space-sm);
+    opacity: 0.8;
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+  }
+
+  .lightbox-modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+  }
+
+  .lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background-color: var(--color-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.8);
+    transition: transform var(--transition-normal);
+  }
+
+  .lightbox-modal.open .lightbox-content {
+    transform: scale(1);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-fast);
+  }
+
+  .lightbox-close:hover,
+  .lightbox-close:focus {
+    background-color: var(--color-accent);
+  }
+
+  .lightbox-image-container {
+    position: relative;
+    max-height: 70vh;
+    overflow: hidden;
+  }
+
+  .lightbox-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .lightbox-info {
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .lightbox-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .lightbox-category {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .showcase {
+      padding: calc(var(--space-xl) * 1.5) 0;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-button,
+    .gallery-image,
+    .image-overlay,
+    .lightbox-modal,
+    .lightbox-content {
+      transition: none;
+    }
+
+    .gallery-button:hover {
+      transform: none;
+    }
+
+    .gallery-button:hover .gallery-image {
+      transform: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .filter-button {
+      border-width: 3px;
+    }
+
+    .image-overlay {
+      background: rgba(0, 0, 0, 0.8);
+    }
+  }
+</style> 
