@@ -2,6 +2,7 @@ backend:
   name: github
   repo: stableotto/hotelbarstools
   branch: main
+  auth_endpoint: /auth
 
 # Uncomment for local development only
 # local_backend: true
