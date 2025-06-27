@@ -2,8 +2,8 @@ backend:
   name: github
   repo: stableotto/hotelbarstools
   branch: main
-  auth_type: implicit
-  app_id: Ov23li6oBSkyyzPAM0zE
+  base_url: https://hotelbarstools.pages.dev
+  auth_endpoint: /auth
 
 # Uncomment for local development only
 # local_backend: true

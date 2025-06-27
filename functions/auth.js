@@ -1,4 +1,17 @@
 // Cloudflare Pages function for DecapCMS GitHub OAuth
+
+// Handle CORS preflight
+export async function onRequestOptions(context) {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+    },
+  });
+}
+
 export async function onRequestGet(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -35,32 +48,18 @@ export async function onRequestGet(context) {
     const data = await response.json();
     
     if (data.access_token) {
-      // Return success page with token for DecapCMS
-      const html = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Authorization Successful</title>
-        </head>
-        <body>
-          <h1>Authorization Successful</h1>
-          <p>Redirecting back to CMS...</p>
-          <script>
-            // DecapCMS expects this specific format
-            if (window.opener) {
-              window.opener.postMessage('authorization:github:success:{"token":"${data.access_token}","provider":"github"}', window.location.origin);
-              window.close();
-            } else {
-              // Fallback: redirect to admin with token
-              window.location.href = '/admin/#/access_token=${data.access_token}&token_type=bearer&provider=github';
-            }
-          </script>
-        </body>
-        </html>
-      `;
-      
-      return new Response(html, {
-        headers: { 'Content-Type': 'text/html' },
+      // Return token in JSON format that DecapCMS expects
+      return new Response(JSON.stringify({
+        token: data.access_token,
+        provider: 'github'
+      }), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+        },
       });
     } else {
       throw new Error('Failed to get access token');
