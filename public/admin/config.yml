@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: stableotto/hotelbarstools
   branch: main
 
 # For local development (comment out for production)
