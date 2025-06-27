@@ -3,8 +3,8 @@ backend:
   repo: stableotto/hotelbarstools
   branch: main
 
-# For local development (comment out for production)
-local_backend: true
+# Uncomment for local development only
+# local_backend: true
 
 media_folder: "public/images"
 public_folder: "/images"
