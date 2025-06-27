@@ -3,6 +3,7 @@ title: "Outdoor Lounge"
 description: "Weather-resistant designs that bring comfort and style to outdoor hospitality spaces with durable materials and all-season construction."
 hero_image: "/images/collections/outdoor-hero.jpg"
 hero_alt: "Outdoor lounge bar stools on resort terrace"
+featured: false
 order: 6
 features:
   - "All-weather construction"
@@ -11,23 +12,44 @@ features:
   - "Quick-dry cushions"
   - "Corrosion-resistant hardware"
 specifications:
-  height_range: "28-32 inches"
-  materials: ["Aluminum", "Teak", "All-Weather Wicker"]
-  weight_capacity: "300 lbs"
-  warranty: "5 years outdoor"
+  materials:
+    - "Aluminum"
+    - "Teak"
+    - "All-Weather Wicker"
+  dimensions: "18\" W x 20\" D x 30\" H"
+  weight: "14 lbs"
+  warranty: "5 years outdoor use"
 products:
-  - name: "Resort Terrace Stool"
+  - id: "outdoor-001"
+    name: "Resort Terrace Stool"
     image: "/images/products/resort-terrace.jpg"
-    price: "$429"
-    description: "Teak and aluminum with quick-dry cushions"
-  - name: "Poolside Classic"
+    alt: "Resort Terrace bar stool with teak and aluminum"
+    price_range: "$400 - $500"
+    material: "Teak & Aluminum"
+    colors:
+      - "Natural Teak"
+      - "Weathered Gray"
+      - "Ocean Blue"
+    dimensions: "18\" x 20\" x 30\""
+  - id: "outdoor-002"
+    name: "Poolside Classic"
     image: "/images/products/poolside-classic.jpg"
-    price: "$389"
-    description: "All-weather wicker with UV protection"
+    alt: "Poolside Classic bar stool with all-weather wicker"
+    price_range: "$350 - $450"
+    material: "All-Weather Wicker"
+    colors:
+      - "Sand Beige"
+      - "Charcoal Gray"
+      - "Coastal White"
+    dimensions: "17\" x 19\" x 30\""
 seo:
-  meta_title: "Outdoor Bar Stools | Weather-Resistant Lounge Seating"
-  meta_description: "Shop premium outdoor bar stools built for all-weather durability. Perfect for resort terraces, poolside bars, and outdoor dining."
-  keywords: ["outdoor bar stools", "weather resistant furniture", "poolside seating", "resort furniture"]
+  title: "Outdoor Bar Stools | Weather-Resistant Lounge Seating"
+  description: "Shop premium outdoor bar stools built for all-weather durability. Perfect for resort terraces, poolside bars, and outdoor dining."
+  keywords:
+    - "outdoor bar stools"
+    - "weather resistant furniture"
+    - "poolside seating"
+    - "resort furniture"
 ---
 
 # Outdoor Lounge Collection

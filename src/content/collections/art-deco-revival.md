@@ -3,6 +3,7 @@ title: "Art Deco Revival"
 description: "Glamorous designs inspired by the golden age of hospitality, featuring geometric patterns, rich materials, and opulent details."
 hero_image: "/images/collections/art-deco-hero.jpg"
 hero_alt: "Art Deco revival bar stools in luxury hotel lobby"
+featured: false
 order: 7
 features:
   - "Geometric design patterns"
@@ -11,23 +12,44 @@ features:
   - "Stepped architectural forms"
   - "Luxury material combinations"
 specifications:
-  height_range: "30-32 inches"
-  materials: ["Mahogany", "Brass", "Velvet"]
-  weight_capacity: "275 lbs"
-  warranty: "3 years"
+  materials:
+    - "Mahogany"
+    - "Brass"
+    - "Velvet"
+  dimensions: "19\" W x 21\" D x 43\" H"
+  weight: "26 lbs"
+  warranty: "3 years commercial use"
 products:
-  - name: "Golden Age Stool"
+  - id: "deco-001"
+    name: "Golden Age Stool"
     image: "/images/products/golden-age.jpg"
-    price: "$799"
-    description: "Mahogany with brass inlay and emerald velvet"
-  - name: "Gatsby Luxe"
+    alt: "Golden Age bar stool with Art Deco styling"
+    price_range: "$750 - $900"
+    material: "Mahogany & Brass"
+    colors:
+      - "Emerald Green"
+      - "Royal Blue"
+      - "Rich Purple"
+    dimensions: "19\" x 21\" x 43\""
+  - id: "deco-002"
+    name: "Gatsby Luxe"
     image: "/images/products/gatsby-luxe.jpg"
-    price: "$849"
-    description: "Art deco stepped design with gold accents"
+    alt: "Gatsby Luxe bar stool with stepped design"
+    price_range: "$800 - $950"
+    material: "Velvet & Gold"
+    colors:
+      - "Deep Sapphire"
+      - "Burgundy Wine"
+      - "Midnight Black"
+    dimensions: "20\" x 22\" x 44\""
 seo:
-  meta_title: "Art Deco Bar Stools | Luxury Vintage Revival Design"
-  meta_description: "Experience the glamour of the golden age with our Art Deco revival bar stools. Geometric patterns and luxury materials for prestigious venues."
-  keywords: ["art deco bar stools", "luxury vintage furniture", "geometric design", "brass accents"]
+  title: "Art Deco Bar Stools | Luxury Vintage Revival Design"
+  description: "Experience the glamour of the golden age with our Art Deco revival bar stools. Geometric patterns and luxury materials for prestigious venues."
+  keywords:
+    - "art deco bar stools"
+    - "luxury vintage furniture"
+    - "geometric design"
+    - "brass accents"
 ---
 
 # Art Deco Revival Collection

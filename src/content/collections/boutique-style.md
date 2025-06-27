@@ -3,6 +3,7 @@ title: "Boutique Style"
 description: "Intimate and sophisticated designs that capture the essence of boutique hospitality with attention to every detail and bespoke craftsmanship."
 hero_image: "/images/collections/boutique-hero.jpg"
 hero_alt: "Boutique style bar stools in elegant hotel setting"
+featured: false
 order: 5
 features:
   - "Handcrafted attention to detail"
@@ -11,23 +12,44 @@ features:
   - "Intimate scale design"
   - "Bespoke customization options"
 specifications:
-  height_range: "26-30 inches"
-  materials: ["Premium Leather", "Solid Wood", "Brass Hardware"]
-  weight_capacity: "275 lbs"
-  warranty: "3 years"
+  materials:
+    - "Premium Leather"
+    - "Solid Wood"
+    - "Brass Hardware"
+  dimensions: "20\" W x 22\" D x 42\" H"
+  weight: "24 lbs"
+  warranty: "3 years limited"
 products:
-  - name: "Intimate Lounge Stool"
+  - id: "boutique-001"
+    name: "Intimate Lounge Stool"
     image: "/images/products/intimate-lounge.jpg"
-    price: "$549"
-    description: "Velvet upholstery with brass frame details"
-  - name: "Boutique Classic"
+    alt: "Intimate Lounge bar stool with velvet upholstery"
+    price_range: "$500 - $600"
+    material: "Velvet & Brass"
+    colors:
+      - "Deep Emerald"
+      - "Rich Navy"
+      - "Warm Burgundy"
+    dimensions: "20\" x 22\" x 40\""
+  - id: "boutique-002"
+    name: "Boutique Classic"
     image: "/images/products/boutique-classic.jpg"
-    price: "$599"
-    description: "Handcrafted leather with copper accents"
+    alt: "Boutique Classic bar stool with leather and copper"
+    price_range: "$550 - $650"
+    material: "Leather & Copper"
+    colors:
+      - "Cognac Leather"
+      - "Black Leather"
+      - "Antique Brown"
+    dimensions: "19\" x 21\" x 42\""
 seo:
-  meta_title: "Boutique Style Bar Stools | Intimate Luxury Design"
-  meta_description: "Discover boutique style bar stools with handcrafted details and premium materials. Perfect for intimate hospitality spaces."
-  keywords: ["boutique bar stools", "luxury seating", "handcrafted furniture", "premium upholstery"]
+  title: "Boutique Style Bar Stools | Intimate Luxury Design"
+  description: "Discover boutique style bar stools with handcrafted details and premium materials. Perfect for intimate hospitality spaces."
+  keywords:
+    - "boutique bar stools"
+    - "luxury seating"
+    - "handcrafted furniture"
+    - "premium upholstery"
 ---
 
 # Boutique Style Collection
