@@ -60,34 +60,17 @@ export async function onRequest(context) {
       throw new Error('No access token received from GitHub');
     }
     
-    // Return token in format that DecapCMS expects
-    const responseBody = JSON.stringify({
-      token: data.access_token,
-      provider: 'github'
-    });
+    // Create the callback URL with token and provider
+    const adminCallbackUrl = `${url.origin}/admin/#access_token=${data.access_token}&token_type=bearer&provider=github`;
     
-    return new Response(responseBody, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
-      },
-    });
+    // Redirect back to DecapCMS admin interface with token
+    return Response.redirect(adminCallbackUrl, 302);
     
   } catch (error) {
     console.error('OAuth error:', error);
     
-    return new Response(JSON.stringify({
-      error: 'Authentication failed',
-      message: error.message
-    }), {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
+    // Redirect to admin with error
+    const errorUrl = `${url.origin}/admin/?error=oauth_error&error_description=${encodeURIComponent(error.message)}`;
+    return Response.redirect(errorUrl, 302);
   }
 } 
