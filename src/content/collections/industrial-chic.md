@@ -1,75 +1,47 @@
 ---
 title: "Industrial Chic"
-description: "Urban-inspired designs with metal and wood combinations. Raw materials meet refined craftsmanship for contemporary spaces with character."
+description: "Raw materials meet refined design in our industrial chic collection, featuring exposed steel, weathered wood, and authentic urban character."
 hero_image: "/images/collections/industrial-hero.jpg"
 hero_alt: "Industrial chic bar stools in modern urban setting"
-featured: true
-order: 4
+order: 3
 features:
-  - "Reclaimed wood seats"
-  - "Powder-coated steel frames"
-  - "Adjustable height mechanism"
-  - "Industrial-grade construction"
-  - "Vintage-inspired design"
-  - "Easy maintenance finishes"
+  - "Exposed steel construction"
+  - "Reclaimed wood surfaces"
+  - "Authentic industrial finishes"
+  - "Urban loft aesthetic"
+  - "Commercial grade durability"
 specifications:
-  materials:
-    - "Reclaimed hardwood"
-    - "Steel tubing"
-    - "Powder coating"
-    - "Industrial hardware"
-  dimensions: "16\" W x 16\" D x 30-34\" H"
-  weight: "18 lbs"
-  warranty: "5 years commercial use"
+  height_range: "24-30 inches"
+  materials: ["Steel", "Reclaimed Wood", "Industrial Finishes"]
+  weight_capacity: "300 lbs"
+  warranty: "5 years"
 products:
-  - id: "industrial-001"
-    name: "Urban Loft"
+  - name: "Urban Loft Stool"
     image: "/images/products/urban-loft.jpg"
-    alt: "Urban Loft bar stool with reclaimed wood"
-    price_range: "$400 - $600"
-    material: "Reclaimed Wood & Steel"
-    colors:
-      - "Natural Wood"
-      - "Dark Walnut"
-      - "Weathered Gray"
-    dimensions: "16\" x 16\" x 30-34\""
-  - id: "industrial-002"
-    name: "Factory Style"
-    image: "/images/products/factory-style.jpg"
-    alt: "Factory Style bar stool with industrial design"
-    price_range: "$350 - $550"
-    material: "Steel & Wood"
-    colors:
-      - "Black Steel"
-      - "Raw Steel"
-      - "Copper Finish"
-    dimensions: "15\" x 15\" x 28-32\""
+    price: "$399"
+    description: "Reclaimed wood seat with black steel frame"
+  - name: "Factory Style Stool"
+    image: "/images/products/factory-style.jpg" 
+    price: "$459"
+    description: "Authentic factory design with adjustable height"
 seo:
-  title: "Industrial Chic Collection - Urban Bar Stools | Hotel Bar Stools"
-  description: "Explore our Industrial Chic collection featuring urban-inspired bar stools with metal and wood combinations. Perfect for modern commercial spaces."
-  keywords:
-    - "industrial bar stools"
-    - "urban furniture"
-    - "reclaimed wood"
-    - "steel bar stools"
+  meta_title: "Industrial Chic Bar Stools | Raw Urban Design"
+  meta_description: "Transform your space with industrial chic bar stools featuring exposed steel and reclaimed wood. Perfect for modern urban interiors."
+  keywords: ["industrial bar stools", "urban design", "steel construction", "reclaimed wood"]
 ---
 
 # Industrial Chic Collection
 
-Embrace the raw beauty of urban design with our Industrial Chic Collection. These pieces celebrate the honest materials and functional aesthetics of industrial architecture, bringing authentic character to modern hospitality spaces.
+Embrace the raw beauty of industrial design with our Industrial Chic collection. These bar stools celebrate the aesthetic of urban lofts and converted warehouses, combining exposed steel frameworks with authentic reclaimed materials.
 
-## Urban Inspiration
+## Design Philosophy
 
-Drawing from the converted lofts and warehouses of industrial districts, our designs feature exposed steel frames and reclaimed wood surfaces. Each piece tells a story of urban renewal and sustainable design practices.
-
-## Sustainable Materials
-
-We source reclaimed hardwood from decommissioned buildings and structures, giving new life to materials with history. The steel components are made from recycled materials and finished with eco-friendly powder coatings.
+Our industrial pieces capture the essence of urban sophistication, where form follows function and every element serves a purpose. The deliberate use of raw materials creates an authentic atmosphere that speaks to contemporary urban living.
 
 ## Perfect For
 
-- Urban hotels and boutique properties
-- Brewery taprooms and gastropubs
-- Coworking spaces and tech offices
-- Loft-style event venues
-- Modern apartment amenities 
+- Urban loft spaces
+- Modern industrial kitchens  
+- Restaurant and bar environments
+- Co-working spaces
+- Contemporary office break rooms 

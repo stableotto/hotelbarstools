@@ -1,59 +1,47 @@
 ---
 title: "Sustainable Living"
-description: "Eco-friendly materials without compromising on style. Responsibly sourced furniture that supports environmental stewardship and conscious hospitality."
+description: "Eco-conscious designs crafted from responsibly sourced materials, combining environmental responsibility with exceptional style and durability."
 hero_image: "/images/collections/sustainable-hero.jpg"
-hero_alt: "Sustainable living bar stools in eco-friendly hotel setting"
-featured: false
+hero_alt: "Sustainable living bar stools in eco-friendly hotel"
 order: 8
 features:
-  - "FSC-certified wood"
-  - "Recycled aluminum frames"
-  - "Low-VOC finishes"
-  - "Biodegradable packaging"
+  - "FSC-certified wood sources"
+  - "Recycled metal components"
+  - "Low-VOC natural finishes"
   - "Carbon-neutral shipping"
-  - "Circular design principles"
+  - "Biodegradable packaging"
 specifications:
-  materials:
-    - "FSC-certified bamboo"
-    - "Recycled metals"
-    - "Natural latex"
-    - "Organic textiles"
-  dimensions: "17\" W x 19\" D x 31\" H"
-  weight: "16 lbs"
-  warranty: "5 years sustainability guarantee"
+  height_range: "24-30 inches"
+  materials: ["Bamboo", "Recycled Steel", "Natural Fibers"]
+  weight_capacity: "300 lbs"
+  warranty: "5 years"
 products:
-  - id: "sustainable-001"
-    name: "Earth Conscious"
-    image: "/images/products/earth-conscious.jpg"
-    alt: "Earth Conscious bar stool made from sustainable materials"
-    price_range: "$500 - $750"
-    material: "Bamboo & Recycled Steel"
-    colors:
-      - "Natural Bamboo"
-      - "Charcoal"
-      - "Sage Green"
-    dimensions: "17\" x 19\" x 31\""
+  - name: "Earth Harmony Stool"
+    image: "/images/products/earth-harmony.jpg"
+    price: "$449"
+    description: "Bamboo construction with recycled steel frame"
+  - name: "Green Legacy"
+    image: "/images/products/green-legacy.jpg"
+    price: "$499"
+    description: "Reclaimed teak with natural fiber cushions"
 seo:
-  title: "Sustainable Living Collection - Eco-Friendly Bar Stools | Hotel Bar Stools"
-  description: "Discover our Sustainable Living collection featuring eco-friendly bar stools made from responsibly sourced materials."
-  keywords:
-    - "sustainable furniture"
-    - "eco-friendly bar stools"
-    - "green hospitality"
-    - "FSC certified"
+  meta_title: "Sustainable Bar Stools | Eco-Friendly Furniture Design"
+  meta_description: "Choose sustainable bar stools made from eco-friendly materials. FSC-certified wood and recycled components for responsible hospitality."
+  keywords: ["sustainable bar stools", "eco-friendly furniture", "FSC certified", "green hospitality"]
 ---
 
 # Sustainable Living Collection
 
-Lead the way in environmental responsibility with our Sustainable Living Collection. These thoughtfully designed pieces prove that eco-conscious choices don't require compromise on style or quality.
+Lead the way in responsible hospitality with our Sustainable Living collection. These thoughtfully designed bar stools prove that environmental consciousness and exceptional style can coexist beautifully.
 
-## Environmental Stewardship
+## Environmental Commitment
 
-Every material is carefully selected for minimal environmental impact. From FSC-certified wood to recycled metals, each component supports sustainable forestry and circular economy principles.
+Every piece in this collection is crafted using sustainably sourced materials, renewable resources, and responsible manufacturing processes that minimize environmental impact.
 
 ## Perfect For
 
-- Eco-resorts and green hotels
 - LEED-certified buildings
-- Corporate sustainability initiatives
-- Environmental education centers 
+- Eco-conscious hotels and resorts
+- Sustainable restaurants
+- Green conference centers
+- Environmentally focused venues 

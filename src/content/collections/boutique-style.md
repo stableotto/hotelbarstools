@@ -1,59 +1,47 @@
 ---
 title: "Boutique Style"
-description: "Unique pieces perfect for boutique hotels and intimate spaces. Artisanal designs that create memorable experiences for discerning guests."
+description: "Intimate and sophisticated designs that capture the essence of boutique hospitality with attention to every detail and bespoke craftsmanship."
 hero_image: "/images/collections/boutique-hero.jpg"
-hero_alt: "Boutique style bar stools in intimate hotel setting"
-featured: false
+hero_alt: "Boutique style bar stools in elegant hotel setting"
 order: 5
 features:
-  - "Artisanal craftsmanship"
-  - "Limited edition designs"
-  - "Custom fabric options"
-  - "Unique wood grain patterns"
-  - "Personalized details"
-  - "Small batch production"
+  - "Handcrafted attention to detail"
+  - "Premium fabric upholstery"
+  - "Brass and copper accents"
+  - "Intimate scale design"
+  - "Bespoke customization options"
 specifications:
-  materials:
-    - "Exotic hardwoods"
-    - "Designer fabrics"
-    - "Hand-forged metals"
-    - "Natural finishes"
-  dimensions: "20\" W x 22\" D x 42\" H"
-  weight: "24 lbs"
-  warranty: "3 years limited"
+  height_range: "26-30 inches"
+  materials: ["Premium Leather", "Solid Wood", "Brass Hardware"]
+  weight_capacity: "275 lbs"
+  warranty: "3 years"
 products:
-  - id: "boutique-001"
-    name: "Artisan Craft"
-    image: "/images/products/artisan-craft.jpg"
-    alt: "Artisan Craft bar stool with unique wood grain"
-    price_range: "$700 - $1,100"
-    material: "Exotic Wood"
-    colors:
-      - "Zebrawood"
-      - "Purpleheart"
-      - "Padauk"
-    dimensions: "20\" x 22\" x 42\""
+  - name: "Intimate Lounge Stool"
+    image: "/images/products/intimate-lounge.jpg"
+    price: "$549"
+    description: "Velvet upholstery with brass frame details"
+  - name: "Boutique Classic"
+    image: "/images/products/boutique-classic.jpg"
+    price: "$599"
+    description: "Handcrafted leather with copper accents"
 seo:
-  title: "Boutique Style Collection - Artisanal Bar Stools | Hotel Bar Stools"
-  description: "Discover our Boutique Style collection featuring unique, artisanal bar stools perfect for boutique hotels and intimate spaces."
-  keywords:
-    - "boutique furniture"
-    - "artisanal bar stools"
-    - "unique designs"
-    - "small hotels"
+  meta_title: "Boutique Style Bar Stools | Intimate Luxury Design"
+  meta_description: "Discover boutique style bar stools with handcrafted details and premium materials. Perfect for intimate hospitality spaces."
+  keywords: ["boutique bar stools", "luxury seating", "handcrafted furniture", "premium upholstery"]
 ---
 
 # Boutique Style Collection
 
-Celebrate individuality with our Boutique Style Collection. These one-of-a-kind pieces are designed for intimate spaces where every detail matters and every guest experience is personal.
+Experience the intimate charm of boutique hospitality with our carefully curated collection of sophisticated bar stools. Each piece reflects the personalized attention and refined aesthetic that defines exceptional boutique properties.
 
-## Artisanal Excellence
+## Craftsmanship Focus
 
-Each piece in this collection is crafted by skilled artisans who bring their unique vision to every creation. No two pieces are exactly alike, ensuring your space has truly distinctive character.
+Our boutique pieces emphasize traditional craftsmanship techniques combined with contemporary comfort. Every stool is thoughtfully designed to create an atmosphere of exclusivity and warmth.
 
 ## Perfect For
 
-- Boutique hotels and bed & breakfasts
-- Wine bars and intimate restaurants
-- Artist studios and creative spaces
-- Luxury vacation rentals 
+- Boutique hotels and inns
+- Wine bars and intimate lounges
+- High-end residential spaces
+- Exclusive club environments
+- Sophisticated restaurant bars 
