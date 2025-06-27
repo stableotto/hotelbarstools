@@ -1,20 +1,24 @@
 // Cloudflare Pages function for DecapCMS GitHub OAuth
-
-// Handle CORS preflight
-export async function onRequestOptions(context) {
-  return new Response(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
-    },
-  });
-}
-
-export async function onRequestGet(context) {
-  const { request, env } = context;
+export async function onRequest(context) {
+  const { request } = context;
   const url = new URL(request.url);
+  
+  // Handle CORS preflight
+  if (request.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+      },
+    });
+  }
+  
+  if (request.method !== 'GET') {
+    return new Response('Method not allowed', { status: 405 });
+  }
+  
   const code = url.searchParams.get('code');
   
   if (!code) {
@@ -32,11 +36,12 @@ export async function onRequestGet(context) {
   const clientSecret = '96ad98e9c1a684f54c2df0c209a3e4ee0aabe076';
   
   try {
-    const response = await fetch('https://github.com/login/oauth/access_token', {
+    const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        'User-Agent': 'DecapCMS-OAuth'
       },
       body: JSON.stringify({
         client_id: 'Ov23li6oBSkyyzPAM0zE',
@@ -45,28 +50,44 @@ export async function onRequestGet(context) {
       }),
     });
     
-    const data = await response.json();
-    
-    if (data.access_token) {
-      // Return token in JSON format that DecapCMS expects
-      return new Response(JSON.stringify({
-        token: data.access_token,
-        provider: 'github'
-      }), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
-        },
-      });
-    } else {
-      throw new Error('Failed to get access token');
+    if (!tokenResponse.ok) {
+      throw new Error(`GitHub API error: ${tokenResponse.status}`);
     }
+    
+    const data = await tokenResponse.json();
+    
+    if (!data.access_token) {
+      throw new Error('No access token received from GitHub');
+    }
+    
+    // Return token in format that DecapCMS expects
+    const responseBody = JSON.stringify({
+      token: data.access_token,
+      provider: 'github'
+    });
+    
+    return new Response(responseBody, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+      },
+    });
+    
   } catch (error) {
-    return new Response('Authentication failed: ' + error.message, {
+    console.error('OAuth error:', error);
+    
+    return new Response(JSON.stringify({
+      error: 'Authentication failed',
+      message: error.message
+    }), {
       status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
     });
   }
 } 
