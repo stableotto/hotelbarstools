@@ -35,7 +35,7 @@ export async function onRequestGet(context) {
     const data = await response.json();
     
     if (data.access_token) {
-      // Return success page with token
+      // Return success page with token for DecapCMS
       const html = `
         <!DOCTYPE html>
         <html>
@@ -44,14 +44,16 @@ export async function onRequestGet(context) {
         </head>
         <body>
           <h1>Authorization Successful</h1>
-          <p>You can now close this window and return to the CMS.</p>
+          <p>Redirecting back to CMS...</p>
           <script>
-            window.opener && window.opener.postMessage({
-              type: 'authorization_complete',
-              provider: 'github',
-              token: '${data.access_token}'
-            }, window.location.origin);
-            window.close();
+            // DecapCMS expects this specific format
+            if (window.opener) {
+              window.opener.postMessage('authorization:github:success:{"token":"${data.access_token}","provider":"github"}', window.location.origin);
+              window.close();
+            } else {
+              // Fallback: redirect to admin with token
+              window.location.href = '/admin/#/access_token=${data.access_token}&token_type=bearer&provider=github';
+            }
           </script>
         </body>
         </html>
